@@ -1,29 +1,32 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"app/model"
+)
 
 var currentId int
 
-var todos Todos
+var todos model.Todos
 
 // Give us some seed data
 func init() {
-	RepoCreateTodo(Todo{Name: "Write presentation", Completed: true})
-	RepoCreateTodo(Todo{Name: "Host meetup"})
+	RepoCreateTodo(model.Todo{Name: "Write presentation", Completed: true})
+	RepoCreateTodo(model.Todo{Name: "Host meetup"})
 }
 
-func RepoFindTodo(id int) Todo {
+func RepoFindTodo(id int) model.Todo {
 	for _, t := range todos {
 		if t.Id == id {
 			return t
 		}
 	}
 	// return empty Todo if not found
-	return Todo{}
+	return model.Todo{}
 }
 
 //this is bad, I don't think it passes race condtions
-func RepoCreateTodo(t Todo) Todo {
+func RepoCreateTodo(t model.Todo) model.Todo {
 	currentId += 1
 	t.Id = currentId
 	todos = append(todos, t)

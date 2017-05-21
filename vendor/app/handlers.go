@@ -9,6 +9,7 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	"app/model"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
@@ -56,7 +57,7 @@ curl -H "Content-Type: application/json" -d '{"name":"New Todo"}' http://localho
 
 */
 func TodoCreate(w http.ResponseWriter, r *http.Request) {
-	var todo Todo
+	var todo model.Todo
 	body, err := ioutil.ReadAll(io.LimitReader(r.Body, 1048576))
 	if err != nil {
 		panic(err)
